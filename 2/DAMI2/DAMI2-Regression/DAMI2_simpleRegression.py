@@ -22,23 +22,25 @@ def estimate_coef(x, y):
 	n = np.size(x) 
 
 	# HERE: Get the mean of x and y vector (hint: use built-in functions)
-	
+	mean_x, mean_y = np.mean(x), np.mean(y)
 
 	# calculating cross-deviation and deviation about x 
-	SS_xy = np.sum(y*x) - n*m_y*m_x 
-	SS_xx = np.sum(x*x) - n*m_x*m_x 
+	SS_xy = np.sum(y*x) - n*mean_y*mean_x 
+	SS_xx = np.sum(x*x) - n*mean_x*mean_x 
 
 	# HERE: Calculate the regression coefficients 
-	beta_1 = 
-	beta_0 = 
+	beta_1 = SS_xy / SS_xx
+	beta_0 = mean_y - beta_1*mean_x
 	
 	return(beta_0, beta_1) 
 
-def plot_regression_line(x, y, b): 
+def plot_regression_line(x, y, b): # b = estimated coefficient 
 	# HERE: plot the actual points as scatter plot 
+	plt.scatter(x, y, color = "m", 
+               marker = "o", s = 30)
 
 	# HERE: compute the predicted response vector 
-	y_pred = 
+	y_pred = b[0] + b[1]*x 
 
 	# plotting the regression line 
 	plt.plot(x, y_pred, color = "k") 
@@ -52,10 +54,9 @@ def plot_regression_line(x, y, b):
 
 # DATASET INPUT
 def main(): 	
-
 	# estimating coefficients 
 	b = estimate_coef(x, y) 
-	print 'The estimated coefficients are ' + repr(b[0]) + ' and ' + repr(b[1])
+	print('The estimated coefficients are ' + repr(b[0]) + ' and ' + repr(b[1]))
 
 	# plotting regression line 
 	plt.figure(2)
